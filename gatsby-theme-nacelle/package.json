@@ -1,0 +1,13 @@
+{
+  "name": "gatsby-theme-nacelle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Nacelle Inc. (getnacelle.com)",
+  "license": "ISC",
+  "peerDependencies": {
+    "gatsby": "^2.6.0"
+  },
+  "dependencies": {
+    "gatsby-source-graphql": "^2.1.31"
+  }
+}
