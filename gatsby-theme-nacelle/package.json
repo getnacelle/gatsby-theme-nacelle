@@ -1,6 +1,18 @@
 {
-  "name": "gatsby-theme-nacelle",
+  "name": "@nacelle/gatsby-theme-nacelle",
   "version": "1.0.0",
+  "description": "A Gatsby theme for loading data from the Nacelle Hail Frequency API",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-theme",
+    "nacelle",
+    "ecommerce",
+    "e-commerce",
+    "commerce",
+    "shopify",
+    "magento"
+  ],
   "main": "index.js",
   "author": "Nacelle Inc. (getnacelle.com)",
   "license": "ISC",

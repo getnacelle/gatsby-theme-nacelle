@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-theme-nacelle-workspace",
+  "name": "@nacelle/gatsby-theme-nacelle-workspace",
   "private": true,
   "version": "0.0.1",
   "main": "index.js",
