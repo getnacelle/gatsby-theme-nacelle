@@ -1,0 +1,19 @@
+{
+  "name": "gatsby-theme-nacelle",
+  "build": {
+    "env": {
+      "NACELLE_SPACE_ID": "@nacelle_space_id_starship_lite",
+      "NACELLE_GRAPHQL_TOKEN": "@nacelle_graphql_token_starship_lite",
+      "BUILD_MODE": "universal"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "example/public"
+      }
+    }
+  ]
+}

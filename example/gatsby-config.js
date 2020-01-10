@@ -4,7 +4,10 @@ module.exports = {
   plugins: [
     {
       resolve: `gatsby-theme-nacelle`, 
-      options: {} 
+      options: {
+        nacelle_space_id: process.env.NACELLE_SPACE_ID,
+        nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
+      } 
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -15,7 +18,7 @@ module.exports = {
         background_color: `#2846dc`,
         theme_color: `#2846dc`,
         display: `minimal-ui`,
-        icon: `src/images/nacelle-rocket-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/nacelle-rocket-icon.png`,
       },
     },
   ],
