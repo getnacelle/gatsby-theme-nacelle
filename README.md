@@ -36,4 +36,6 @@ A very basic, totally unstyled Gatsby site running `gatsby-theme-nacelle`. This 
 
 **NOTE**: Cart and checkout functionality will be available in future versions of this demo site.
 
+Check out the deploy [here](https://affectionate-sinoussi-2c533e.netlify.com/).
+
 Learn more in the [docs](./example/README.md).

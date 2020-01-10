@@ -11,6 +11,8 @@
 
 A very basic, totally unstyled Gatsby site running `gatsby-theme-nacelle`. This site demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections.
 
+Check out the deploy [here](https://affectionate-sinoussi-2c533e.netlify.com/).
+
 **NOTE**: Cart and checkout functionality will be available in future versions of this demo site.
 
 ## What is Nacelle?
