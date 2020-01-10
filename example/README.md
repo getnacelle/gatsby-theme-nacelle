@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://www.getnacelle.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-    <img alt="Nacelle" src="./src/images/nacelle-rocket-icon-crop.png" width="60" />
+    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/example/src/images/nacelle-rocket-icon-crop.png" width="60" />
   </a>
 </p>
 

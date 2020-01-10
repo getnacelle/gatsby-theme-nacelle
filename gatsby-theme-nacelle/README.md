@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://www.getnacelle.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-    <img alt="Nacelle" src="../example/src/images/nacelle-rocket-icon-crop.png" width="60" />
+    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/example/src/images/nacelle-rocket-icon-crop.png" width="60" />
   </a>
 </p>
 
@@ -13,15 +13,16 @@ This Gatsby theme effectively functions as a plugin to connect to a [Nacelle](ht
 
 ## What is Nacelle?
 
-Nacelle is a headless eCommerce platform made for developers who want to create superior customer buying experiences. When you connect your Shopify, Magento, or custom eCommerce store to Nacelle, our proprietary indexing system supplies a high-performance connection to your back end. 
+Nacelle is a headless eCommerce platform made for developers who want to create superior customer buying experiences. When you connect your Shopify, Magento, or custom eCommerce store to Nacelle, our proprietary indexing system supplies a high-performance connection to your back end.
 
 To learn more, check out the [Nacelle docs](https://docs.getnacelle.com/intro.html#what-is-nacelle).
 
 ## Quick Start
 
-Follow these steps to add `gatsby-theme-nacelle` to your  Gatsby site:
+Follow these steps to add `gatsby-theme-nacelle` to your Gatsby site:
 
 ### Install
+
 #### With Yarn
 
 ```shell
@@ -46,7 +47,7 @@ module.exports = {
   plugins: [
     {
       resolve: "gatsby-theme-nacelle",
-      options: {  
+      options: {
         nacelle_space_id: YOUR_NACELLE_SPACE_ID,
         nacelle_graphql_token: YOUR_NACELLE_GRAPHQL_TOKEN
       }
@@ -59,23 +60,23 @@ module.exports = {
 
 Install [dotenv](https://www.npmjs.com/package/dotenv), then create a `.env` file with your Nacelle credentials. For more information about using environment variables in a Gatsby project, check out the [Gatsby docs](https://www.gatsbyjs.org/docs/environment-variables/).
 
-```  
+```
 # .env
-NACELLE_SPACE_ID="your-nacelle-space-id"  
+NACELLE_SPACE_ID="your-nacelle-space-id"
 NACELLE_GRAPHQL_TOKEN="your-nacelle-graphql-token"
 ```
 
 ```javascript
 // gatsby-config.js`
-require('dotenv').config()
+require("dotenv").config();
 
 module.exports = {
   plugins: [
     {
       resolve: "gatsby-theme-nacelle",
-      options: {  
-      	nacelle_space_id: process.env.NACELLE_SPACE_ID,
-      	nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
+      options: {
+        nacelle_space_id: process.env.NACELLE_SPACE_ID,
+        nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
       }
     }
   ]
