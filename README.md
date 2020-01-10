@@ -1,64 +1,37 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.org">
+  <a href="https://www.getnacelle.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+    <img alt="Nacelle" src="./example/src/images/nacelle-rocket-icon-crop.png" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Starter for creating a Gatsby Theme workspace
+  Gatsby-Theme-Nacelle Workspace
 </h1>
 
+This project was scaffolded with [gatsby-starter-theme-workspace](https://github.com/gatsbyjs/gatsby-starter-theme-workspace). Using this starter makes it easy to develop a theme and see it in action on an example site. Once you've set up the requisite environment variables, you can fire up the `example` site, connected to `gatsby-theme-nacelle`, by running the `develop` script from the workspace root:
+
 ```shell
-gatsby new my-theme https://github.com/gatsbyjs/gatsby-starter-theme-workspace
-cd my-theme
-yarn workspace example develop
+npm run develop
 ```
 
-## Layout
+## What is Nacelle?
 
-```text
-.
-├── README.md
-├── gatsby-theme-nacelle
-│   ├── README.md
-│   ├── gatsby-config.js
-│   ├── index.js
-│   └── package.json
-├── example
-│   ├── README.md
-│   ├── gatsby-config.js
-│   ├── package.json
-│   └── src
-├── package.json
-└── yarn.lock
+Nacelle is a headless eCommerce platform made for developers who want to create superior customer buying experiences. When you connect your Shopify, Magento, or custom eCommerce store to Nacelle, our proprietary indexing system supplies a high-performance connection to your back end.
 
-3 directories, 10 files
-```
+To learn more, check out the [Nacelle docs](https://docs.getnacelle.com/intro.html#what-is-nacelle).
+
+## What's Inside
 
 ### `gatsby-theme-nacelle`
 
-This directory is the theme package itself. You should rename this at
-some point to be `gatsby-theme-{my-theme-name}`. Also change the
-`package.json` name field and the corresponding dependency in the
-example directory's `package.json`/`gatsby-config.js` to match the chosen name.
+This Gatsby theme effectively functions as a plugin to connect to a [Nacelle](https://www.getnacelle.com) store via the Nacelle Hail Frequency API. This connection allows you to get all of a store's product data (individual products, collections, etc.) and content data (blog posts, articles, etc.).
 
-- `gatsby-theme-nacelle/`
-  - `gatsby-config.js`: An empty gatsby-config that you can use as a starting point for building functionality into your theme.
-  - `index.js`: Since themes also function as plugins, this is an empty file that
-    gatsby needs to use this theme as a plugin.
-  - `package.json`: The dependencies that your theme will pull in when people install it. `gatsby` should be a `peerDependency`.
+Learn more in the [docs](./gatsby-theme-nacelle/README.md).
 
 ### `example`
 
-This is an example usage of your theme. It should look the same as the
-site of someone who installed and used your theme from npm.
+A very basic, totally unstyled Gatsby site running `gatsby-theme-nacelle`. This site demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections.
 
-- `example/`
-  - `gatsby-config.js`: Specifies which theme to use and any other one-off config a site might need.
-  - `src/`: Source code such as one-off pages or components that might live in
-    a user's site.
+**NOTE**: Cart and checkout functionality will be available in future versions of this demo site.
 
-You can run the example with:
-
-```shell
-yarn workspace example develop
-```
+Learn more in the [docs](./example/README.md).
