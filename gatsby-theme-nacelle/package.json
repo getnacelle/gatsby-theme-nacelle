@@ -1,6 +1,6 @@
 {
   "name": "@nacelle/gatsby-theme-nacelle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Gatsby theme for loading data from the Nacelle Hail Frequency API",
   "keywords": [
     "gatsby",
@@ -15,6 +15,11 @@
   ],
   "main": "index.js",
   "author": "Nacelle Inc. (getnacelle.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getnacelle/gatsby-theme-nacelle",
+    "directory": "gatsby-theme-nacelle"
+  },
   "license": "ISC",
   "peerDependencies": {
     "gatsby": "^2.6.0"
