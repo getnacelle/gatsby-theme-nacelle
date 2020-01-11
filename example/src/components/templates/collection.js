@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
 const Collection = ({ pageContext }) => {
   const { title, imageSrc, handles, allProducts } = pageContext
