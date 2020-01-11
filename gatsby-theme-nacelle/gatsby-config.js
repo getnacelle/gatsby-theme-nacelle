@@ -15,9 +15,10 @@ module.exports = options => {
         options: {
           typeName: 'Nacelle',
           fieldName: 'nacelle',
-          url: `https://hailfrequency.com/graphql/v1/space/${nacelle_space_id}`,
+          url: 'https://hailfrequency.com/v2/graphql',
           headers: {
-            'X-Nacelle-Token': nacelle_graphql_token
+            'X-Nacelle-Space-ID': nacelle_space_id,
+            'X-Nacelle-Space-Token': nacelle_graphql_token
           },
         },
       },

@@ -3,11 +3,10 @@ const path = require('path')
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   // Fetch all products
   const products = await graphql(`
-  {
-    nacelle {
-      getAllProducts {
-        edges {
-          node {
+    {
+      nacelle {
+        getProducts {
+          items {
             title
             handle
             featuredMedia {
@@ -16,14 +15,13 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
-    }
-  }  
+    }  
   `)
-  products.data.nacelle.getAllProducts.edges.forEach( item => {
-    const { title, handle } = item.node
+  products.data.nacelle.getProducts.items.forEach( item => {
+    const { title, handle } = item
     let src
-    if (item.node.featuredMedia) {
-      src = item.node.featuredMedia.src
+    if (item.featuredMedia) {
+      src = item.featuredMedia.src
     }
     createPage({
       // Build a page for each product
@@ -40,7 +38,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     path: `/shop`,
     component: path.resolve('./src/components/templates/all-products.js'),
     context: {
-      products: products.data.nacelle.getAllProducts.edges
+      products: products.data.nacelle.getProducts.items
     }
   })
 
@@ -48,39 +46,30 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const collections = await graphql(`
     {
       nacelle {
-        getAllCollections {
-          edges {
-            node {
-              title
-              handle
-              featuredMedia {
-                src
-              }
-              products {
-                edges {
-                  node {
-                    title
-                    handle
-                    featuredMedia {
-                      src
-                    }
-                  }
-                }
-              }
+        getCollections {
+          items {
+            title
+            handle
+            featuredMedia {
+              src
+            }
+            productLists {
+              handles
             }
           }
         }
       }
     }
   `)
-  collections.data.nacelle.getAllCollections.edges.forEach( item => {
-    const { title, handle } = item.node
-    let src, products
-    if (item.node.featuredMedia) {
-      src = item.node.featuredMedia.src
+  collections.data.nacelle.getCollections.items.forEach( item => {
+    const { title, handle } = item
+    let src, handles
+    if (item.featuredMedia) {
+      src = item.featuredMedia.src
     }
-    if (item.node.products) {
-      products = item.node.products.edges
+    if (item.productLists) {
+      const [handlesArray] = item.productLists
+      handles = handlesArray ? handlesArray.handles : []
     }
     createPage({
       // Build a page for each collection
@@ -89,7 +78,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       context: {
         title,
         imageSrc: src,
-        products
+        handles,
+        allProducts: products.data.nacelle.getProducts.items
       }
     })
   })
