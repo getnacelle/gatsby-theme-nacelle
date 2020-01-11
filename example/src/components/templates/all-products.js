@@ -8,9 +8,9 @@ const allProducts = ({ pageContext }) => {
       <h1>All Products</h1>
       <ul style={{ listStyleType: 'none' }}>
         {products.map( el => 
-          <li key={el.node.handle}>
-            <h1><Link to={`/products/${el.node.handle}`}>{el.node.title}</Link></h1>
-            <img src={el.node.featuredMedia.src} alt={el.node.title} />
+          <li key={el.handle}>
+            <h1><Link to={`/products/${el.handle}`}>{el.title}</Link></h1>
+            <img src={el.featuredMedia.src} alt={el.title} />
           </li>
         )}
       </ul>
