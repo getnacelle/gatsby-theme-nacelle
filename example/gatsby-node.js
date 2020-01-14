@@ -12,13 +12,24 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             featuredMedia {
               src
             }
+            variants {
+              id
+              title
+              selectedOptions {
+                name
+                value
+              }
+              featuredMedia {
+                src
+              }
+            }
           }
         }
       }
     }  
   `)
   products.data.nacelle.getProducts.items.forEach( item => {
-    const { title, handle } = item
+    const { title, handle, variants } = item
     let src
     if (item.featuredMedia) {
       src = item.featuredMedia.src
@@ -29,7 +40,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve('./src/components/templates/product-detail.js'),
       context: {
         title,
-        imageSrc: src
+        imageSrc: src,
+        variants
       }
     })
   })
