@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   // Fetch all products
@@ -27,13 +27,13 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
-    }  
-  `)
-  products.data.nacelle.getProducts.items.forEach( item => {
-    const { title, handle, variants } = item
-    let src
+    }
+  `);
+  products.data.nacelle.getProducts.items.forEach(item => {
+    const { title, handle, variants } = item;
+    let src;
     if (item.featuredMedia) {
-      src = item.featuredMedia.src
+      src = item.featuredMedia.src;
     }
     createPage({
       // Build a page for each product
@@ -45,8 +45,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         imageSrc: src,
         variants
       }
-    })
-  })
+    });
+  });
   createPage({
     // Build a page with all products
     path: `/shop`,
@@ -54,7 +54,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     context: {
       products: products.data.nacelle.getProducts.items
     }
-  })
+  });
 
   // Fetch all collections
   const collections = await graphql(`
@@ -74,16 +74,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
     }
-  `)
-  collections.data.nacelle.getCollections.items.forEach( item => {
-    const { title, handle } = item
-    let src, handles
+  `);
+  collections.data.nacelle.getCollections.items.forEach(item => {
+    const { title, handle } = item;
+    let src;
+    let handles;
     if (item.featuredMedia) {
-      src = item.featuredMedia.src
+      src = item.featuredMedia.src;
     }
     if (item.productLists) {
-      const [handlesArray] = item.productLists
-      handles = handlesArray ? handlesArray.handles : []
+      const [handlesArray] = item.productLists;
+      handles = handlesArray ? handlesArray.handles : [];
     }
     createPage({
       // Build a page for each collection
@@ -95,6 +96,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         handles,
         allProducts: products.data.nacelle.getProducts.items
       }
-    })
-  })
-}
+    });
+  });
+};
