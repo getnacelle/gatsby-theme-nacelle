@@ -35,6 +35,7 @@ export const Product = ({ title, handle, src, variants }) => {
         )}
       </select>
     </div>}
+    <p>$ {(Number(selectedVariant.price)).toFixed(2)}</p>
     <button type="button" onClick={() => dispatch(addToCart())}>
       Add To Cart
     </button>
