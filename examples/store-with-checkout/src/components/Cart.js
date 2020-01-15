@@ -33,7 +33,6 @@ const Cart = () => {
   const dispatch = useDispatch()
   const clearCart = () => ({ type: 'CLEAR_CART' })
   const toggleCart = () => ({ type: 'TOGGLE_CART' })
-  // const getTotal = () => {{ type: 'GET_TOTAL' }}
   const total = lineItems.reduce(
     (subtotal, el) => subtotal + (Number(el.variant.price) * Number(el.variant.qty)), 0
   )
@@ -50,6 +49,7 @@ const Cart = () => {
           top: '0',
           right: '0',
           height: '100%',
+          width: '20em',
           overflow: 'auto',
           border: '1px solid blue',
           backgroundColor: 'white',
