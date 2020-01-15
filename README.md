@@ -12,6 +12,14 @@
 
 This project was scaffolded with [gatsby-starter-theme-workspace](https://github.com/gatsbyjs/gatsby-starter-theme-workspace). Using this starter makes it easy to develop a theme and see it in action on an example site. Once you've set up the requisite environment variables, you can fire up the `example` site, connected to `gatsby-theme-nacelle`, by running the `develop` script from the workspace root:
 
+#### With Yarn
+
+```shell
+yarn develop
+```
+
+#### With NPM
+
 ```shell
 npm run develop
 ```
