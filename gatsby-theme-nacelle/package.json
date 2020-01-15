@@ -21,6 +21,9 @@
     "directory": "gatsby-theme-nacelle"
   },
   "license": "ISC",
+  "scripts": {
+    "publish": "npm publish --access public"
+  },
   "peerDependencies": {
     "gatsby": "^2.6.0"
   },
