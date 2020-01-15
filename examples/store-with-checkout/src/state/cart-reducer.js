@@ -1,6 +1,6 @@
 const initialState = { 
   lineItems: [],
-  isCartVisible: true,
+  isCartVisible: false,
   checkoutId: null,
   checkoutComplete: false,
   error: null
@@ -28,7 +28,8 @@ export default function (state = initialState, action) {
           ...state,
           lineItems: [...lineItems, 
             { title, handle, src, variant:{ ...variant, qty }}
-          ]
+          ],
+          isCartVisible: true
         }
       }
     }
