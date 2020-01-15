@@ -15,6 +15,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             variants {
               id
               title
+              price
               selectedOptions {
                 name
                 value
@@ -40,6 +41,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve('./src/components/templates/product-detail.js'),
       context: {
         title,
+        handle,
         imageSrc: src,
         variants
       }
