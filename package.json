@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "develop": "yarn workspace store-with-checkout develop",
-    "build": "yarn workspace store-with-checkout build"
+    "build": "yarn workspace store-with-checkout build",
+    "serve": "yarn workspace store-with-checkout serve"
   },
   "workspaces": [
     "gatsby-theme-nacelle",
