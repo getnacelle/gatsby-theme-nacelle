@@ -26,13 +26,13 @@ Follow these steps to add `gatsby-theme-nacelle` to your Gatsby site:
 #### With Yarn
 
 ```shell
-yarn add gatsby-theme-nacelle
+yarn add @nacelle/gatsby-theme-nacelle
 ```
 
 #### With NPM
 
 ```shell
-npm i gatsby-theme-nacelle
+npm i @nacelle/gatsby-theme-nacelle
 ```
 
 ### Configure
