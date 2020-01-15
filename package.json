@@ -5,11 +5,11 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
-    "develop": "yarn workspace example develop",
-    "build": "yarn workspace example build"
+    "develop": "yarn workspace store-with-checkout develop",
+    "build": "yarn workspace store-with-checkout build"
   },
   "workspaces": [
     "gatsby-theme-nacelle",
-    "example"
+    "examples/*"
   ]
 }
