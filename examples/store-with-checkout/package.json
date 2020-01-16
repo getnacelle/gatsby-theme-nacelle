@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@nacelle/gatsby-theme-nacelle": "^1.0.0",
+    "axios": "^0.19.1",
     "dotenv": "^8.2.0",
     "gatsby": "^2.18.21",
     "gatsby-plugin-manifest": "^2.2.37",
