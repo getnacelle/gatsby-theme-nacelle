@@ -2,24 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { store } from '../state/store-without-middleware';
 import Cart from '../components/Cart';
 import rootReducer from '../state/root-reducer';
-
-test('the cart is revealed by clicking the "Show Cart" button', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <Cart />
-    </Provider>
-  );
-  const showCartButton = getByText('Show Cart');
-  expect(showCartButton).toBeInTheDocument();
-
-  fireEvent.click(showCartButton);
-  expect(showCartButton).not.toBeInTheDocument();
-  const hideCartButton = getByText('Hide Cart');
-  expect(hideCartButton).toBeInTheDocument();
-});
 
 const payload = {
   title: 'Some Blanket',
@@ -47,15 +31,30 @@ const payload = {
 const initialState = {
   cart: {
     lineItems: [payload],
-    isCartVisible: true
+    isCartVisible: false
   }
 };
 
-const singleItemStore = createStore(rootReducer, initialState);
+const store = createStore(rootReducer, initialState);
+
+test('the cart is revealed by clicking the "Show Cart" button', () => {
+  const { getByText } = render(
+    <Provider store={store}>
+      <Cart />
+    </Provider>
+  );
+  const showCartButton = getByText('Show Cart');
+  expect(showCartButton).toBeInTheDocument();
+
+  fireEvent.click(showCartButton);
+  expect(showCartButton).not.toBeInTheDocument();
+  const hideCartButton = getByText('Hide Cart');
+  expect(hideCartButton).toBeInTheDocument();
+});
 
 test('a product is rendered in the cart', () => {
   const { getByText } = render(
-    <Provider store={singleItemStore}>
+    <Provider store={store}>
       <Cart />
     </Provider>
   );
@@ -65,7 +64,7 @@ test('a product is rendered in the cart', () => {
 
 test("a product's quantity is incremented in the cart", () => {
   const { getByText } = render(
-    <Provider store={singleItemStore}>
+    <Provider store={store}>
       <Cart />
     </Provider>
   );
@@ -80,7 +79,7 @@ test("a product's quantity is incremented in the cart", () => {
 
 test("a product's quantity is decremented in the cart", () => {
   const { getByText } = render(
-    <Provider store={singleItemStore}>
+    <Provider store={store}>
       <Cart />
     </Provider>
   );
