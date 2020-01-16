@@ -3,15 +3,15 @@ import {
   INCREMENT_ITEM,
   DECREMENT_ITEM,
   CLEAR_CART,
-  TOGGLE_CART
+  TOGGLE_CART,
+  STORE_CHECKOUT
 } from './actions';
 
 const initialState = {
   lineItems: [],
   isCartVisible: false,
   checkoutId: null,
-  checkoutComplete: false,
-  error: null
+  checkoutComplete: false
 };
 
 export default function(state = initialState, action) {
@@ -81,6 +81,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isCartVisible: !state.isCartVisible
+      };
+    }
+    case STORE_CHECKOUT: {
+      const { id, completed } = action.payload;
+      return {
+        ...state,
+        checkoutId: id,
+        checkoutComplete: completed
       };
     }
     default: {

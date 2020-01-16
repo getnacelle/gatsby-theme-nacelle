@@ -3,6 +3,7 @@ export const INCREMENT_ITEM = 'INCREMENT_ITEM';
 export const DECREMENT_ITEM = 'DECREMENT_ITEM';
 export const CLEAR_CART = 'CLEAR_CART';
 export const TOGGLE_CART = 'TOGGLE_CART';
+export const STORE_CHECKOUT = 'STORE_CHECKOUT';
 
 export function addToCart(payload) {
   return {
@@ -34,5 +35,12 @@ export function clearCart() {
 export function toggleCart() {
   return {
     type: TOGGLE_CART
+  };
+}
+
+export function storeCheckout(payload) {
+  return {
+    type: STORE_CHECKOUT,
+    payload
   };
 }
