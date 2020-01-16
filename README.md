@@ -12,6 +12,14 @@
 
 This project was scaffolded with [gatsby-starter-theme-workspace](https://github.com/gatsbyjs/gatsby-starter-theme-workspace). Using this starter makes it easy to develop a theme and see it in action on an example site. Once you've set up the requisite environment variables, you can fire up the `example` site, connected to `gatsby-theme-nacelle`, by running the `develop` script from the workspace root:
 
+#### With Yarn
+
+```shell
+yarn develop
+```
+
+#### With NPM
+
 ```shell
 npm run develop
 ```
@@ -28,14 +36,14 @@ To learn more, check out the [Nacelle docs](https://docs.getnacelle.com/intro.ht
 
 This Gatsby theme effectively functions as a plugin to connect to a [Nacelle](https://www.getnacelle.com) store via the Nacelle Hail Frequency API. This connection allows you to get all of a store's product data (individual products, collections, etc.) and content data (blog posts, articles, etc.).
 
-Learn more in the [docs](./gatsby-theme-nacelle/README.md).
+Learn more in the theme's [README](./gatsby-theme-nacelle/README.md).
 
-### `example`
+### `examples`
 
-A very basic, totally unstyled Gatsby site running `gatsby-theme-nacelle`. This site demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections.
+Very basic, spartanly-styled Gatsby sites running `gatsby-theme-nacelle`. These sites demonstrate the use of `gatsby-theme-nacelle` with varying features & levels of complexity. 
 
-**NOTE**: Cart and checkout functionality will be available in future versions of this demo site.
+The most basic example (`product-gallery`) demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections. 
 
-Check out the deploy [here](https://affectionate-sinoussi-2c533e.netlify.com/).
+The `store-with-checkout` example builds on that idea, adding a cart system connected to Redux with a checkout feature powered by Nacelle's Hail Frequency API. 
 
-Learn more in the [docs](./example/README.md).
+Check out the example site [here](https://affectionate-sinoussi-2c533e.netlify.com/), and learn more about the examples from their respective READMEs.

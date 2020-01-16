@@ -60,14 +60,14 @@ module.exports = {
 
 Install [dotenv](https://www.npmjs.com/package/dotenv), then create a `.env` file with your Nacelle credentials. For more information about using environment variables in a Gatsby project, check out the [Gatsby docs](https://www.gatsbyjs.org/docs/environment-variables/).
 
-```
+```dotenv
 # .env
 NACELLE_SPACE_ID="your-nacelle-space-id"
 NACELLE_GRAPHQL_TOKEN="your-nacelle-graphql-token"
 ```
 
 ```javascript
-// gatsby-config.js`
+// gatsby-config.js
 require("dotenv").config();
 
 module.exports = {
