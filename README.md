@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://www.getnacelle.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/example/src/images/nacelle-rocket-icon-crop.png" width="60" />
+    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/examples/store-with-checkout/src/images/nacelle-rocket-icon-crop.png" width="60" />
   </a>
 </p>
 <h1 align="center">
@@ -40,10 +40,10 @@ Learn more in the theme's [README](./gatsby-theme-nacelle/README.md).
 
 ### `examples`
 
-Very basic, spartanly-styled Gatsby sites running `gatsby-theme-nacelle`. These sites demonstrate the use of `gatsby-theme-nacelle` with varying features & levels of complexity. 
+Very basic, spartanly-styled Gatsby sites running `gatsby-theme-nacelle`. These sites demonstrate the use of `gatsby-theme-nacelle` with varying features & levels of complexity.
 
-The most basic example (`product-gallery`) demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections. 
+The most basic example (`product-gallery`) demonstrates the use of `gatsby-node.js` to programatically build pages for products and collections.
 
-The `store-with-checkout` example builds on that idea, adding a cart system connected to Redux with a checkout feature powered by Nacelle's Hail Frequency API. 
+The `store-with-checkout` example builds on that idea, adding a cart system connected to Redux with a checkout feature powered by Nacelle's Hail Frequency API.
 
 Check out the example site [here](https://affectionate-sinoussi-2c533e.netlify.com/), and learn more about the examples from their respective READMEs.
