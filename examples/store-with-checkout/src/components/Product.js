@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'gatsby';
+import { addToCart } from '../state/actions';
 
 export const Product = ({ title, handle, src, variants }) => {
   const dispatch = useDispatch();
   const hasMultipleVariants = variants.length > 1;
   const [selectedVariant, selectVariant] = useState(variants[0]);
   const handleChange = e => selectVariant(variants[e.target.value]);
-  const addToCart = () => ({
-    type: 'ADD_TO_CART',
-    payload: {
-      title,
-      handle,
-      src,
-      variant: selectedVariant
-    }
-  });
+  const addToCartMemo = useCallback(
+    () =>
+      dispatch(
+        addToCart({
+          title,
+          handle,
+          src,
+          variant: selectedVariant
+        })
+      ),
+    [dispatch, handle, selectedVariant, src, title]
+  );
   return (
     <article
       style={{
@@ -40,7 +44,7 @@ export const Product = ({ title, handle, src, variants }) => {
         </div>
       )}
       <p>$ {Number(selectedVariant.price).toFixed(2)}</p>
-      <button type="button" onClick={() => dispatch(addToCart())}>
+      <button type="button" onClick={addToCartMemo}>
         Add To Cart
       </button>
     </article>

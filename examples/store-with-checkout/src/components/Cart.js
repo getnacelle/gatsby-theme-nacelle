@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'gatsby';
+import { increment, decrement, clearCart, toggleCart } from '../state/actions';
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
-  const increment = () => ({ type: 'INCREMENT_ITEM', payload: item });
-  const decrement = () => ({ type: 'DECREMENT_ITEM', payload: item });
   return (
     <div style={{ borderBottom: '1px solid black' }}>
       <h3>
@@ -20,10 +19,10 @@ const CartItem = ({ item }) => {
       <p>
         Quantity: {item.variant.qty}
         <span style={{ marginLeft: '1em' }}>
-          <button type="button" onClick={() => dispatch(decrement())}>
+          <button type="button" onClick={() => dispatch(decrement(item))}>
             -
           </button>
-          <button type="button" onClick={() => dispatch(increment())}>
+          <button type="button" onClick={() => dispatch(increment(item))}>
             +
           </button>
         </span>
@@ -35,7 +34,6 @@ const CartItem = ({ item }) => {
 
 const CartItems = ({ lineItems }) => {
   const dispatch = useDispatch();
-  const clearCart = () => ({ type: 'CLEAR_CART' });
   const total = lineItems.reduce(
     (subtotal, el) =>
       subtotal + Number(el.variant.price) * Number(el.variant.qty),
@@ -67,7 +65,6 @@ const CartItems = ({ lineItems }) => {
 const Cart = () => {
   const lineItems = useSelector(state => state.cart.lineItems);
   const dispatch = useDispatch();
-  const toggleCart = () => ({ type: 'TOGGLE_CART' });
   const isCartEmpty = lineItems.length === 0;
   return (
     <div
@@ -99,7 +96,6 @@ const Cart = () => {
 const CartMenu = () => {
   const isCartVisible = useSelector(state => state.cart.isCartVisible);
   const dispatch = useDispatch();
-  const toggleCart = () => ({ type: 'TOGGLE_CART' });
   return (
     <div style={{ position: 'fixed', top: '0', right: '0' }}>
       {isCartVisible ? (

@@ -1,3 +1,11 @@
+import {
+  ADD_TO_CART,
+  INCREMENT_ITEM,
+  DECREMENT_ITEM,
+  CLEAR_CART,
+  TOGGLE_CART
+} from './actions';
+
 const initialState = {
   lineItems: [],
   isCartVisible: false,
@@ -8,7 +16,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_TO_CART': {
+    case ADD_TO_CART: {
       const { lineItems } = state;
       const { title, handle, src, variant } = action.payload;
       const index = lineItems.findIndex(el => el.variant.id === variant.id);
@@ -31,7 +39,7 @@ export default function(state = initialState, action) {
         isCartVisible: true
       };
     }
-    case 'INCREMENT_ITEM': {
+    case INCREMENT_ITEM: {
       const { lineItems } = state;
       const { variant } = action.payload;
       const index = lineItems.findIndex(el => el.variant.id === variant.id);
@@ -44,7 +52,7 @@ export default function(state = initialState, action) {
         )
       };
     }
-    case 'DECREMENT_ITEM': {
+    case DECREMENT_ITEM: {
       const { lineItems } = state;
       const { variant } = action.payload;
       const index = lineItems.findIndex(el => el.variant.id === variant.id);
@@ -63,13 +71,13 @@ export default function(state = initialState, action) {
         lineItems: [...lineItems].filter((el, idx) => idx !== index)
       };
     }
-    case 'CLEAR_CART': {
+    case CLEAR_CART: {
       return {
         ...state,
         lineItems: []
       };
     }
-    case 'TOGGLE_CART': {
+    case TOGGLE_CART: {
       return {
         ...state,
         isCartVisible: !state.isCartVisible
