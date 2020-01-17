@@ -6,6 +6,9 @@
 </p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eea79857-e8bd-4832-87a4-ca398782251f/deploy-status)](https://app.netlify.com/sites/affectionate-sinoussi-2c533e/deploys)
+[![npm version](https://img.shields.io/npm/v/@nacelle/gatsby-theme-nacelle.svg)](https://www.npmjs.com/package/@nacelle/gatsby-theme-nacelle)
+[![GitHub issues](https://img.shields.io/github/issues/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/issues)
+[![GitHub license](https://img.shields.io/github/license/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/blob/master/LICENSE)
 
 # Demo Store for Gatsby-Theme-Nacelle
 
@@ -38,7 +41,7 @@ GATSBY_NACELLE_GRAPHQL_TOKEN="your-token-goes-here"
 GATSBY_NACELLE_SPACE_ID="your-space-id-goes-here"
 ```
 
-Unlike the `product-gallery` example, this example project requires the use of `GATSBY_*` environment variables because we're using those variables to make client-side queries to the Nacelle Hail Frequency GraphQL API. You can read more about client-side environment variables in  the [Gatsby docs](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).
+Unlike the `product-gallery` example, this example project requires the use of `GATSBY_*` environment variables because we're using those variables to make client-side queries to the Nacelle Hail Frequency GraphQL API. You can read more about client-side environment variables in the [Gatsby docs](https://www.gatsbyjs.org/docs/environment-variables/#client-side-javascript).
 
 Lastly, clone this repository and navigate to `examples/store-with-checkout`, then install with Yarn or NPM.
 

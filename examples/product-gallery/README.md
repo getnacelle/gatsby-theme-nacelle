@@ -6,6 +6,9 @@
 </p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eea79857-e8bd-4832-87a4-ca398782251f/deploy-status)](https://app.netlify.com/sites/affectionate-sinoussi-2c533e/deploys)
+[![npm version](https://img.shields.io/npm/v/@nacelle/gatsby-theme-nacelle.svg)](https://www.npmjs.com/package/@nacelle/gatsby-theme-nacelle)
+[![GitHub issues](https://img.shields.io/github/issues/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/issues)
+[![GitHub license](https://img.shields.io/github/license/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/blob/master/LICENSE)
 
 # Demo Site for Gatsby-Theme-Nacelle
 
