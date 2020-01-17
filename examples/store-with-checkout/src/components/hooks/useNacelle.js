@@ -15,17 +15,17 @@ function formatCredentials({ credentials = null } = {}) {
   return [nacelleSpaceId, nacelleGraphQLtoken];
 }
 
-export function useNacelle({ credentials = null, query = null } = {}) {
+export function useNacelle({ credentials, query } = {}) {
   //
   // Fetch data from the Hail Frequency API with any valid query
   //
-  if (credentials === null) {
+  if (!credentials) {
     throw new Error(
       `useCheckout requires a credentials object containing 
       your nacelle_space_id and nacelle_graphql_token.`
     );
   }
-  if (query === null) {
+  if (!query) {
     throw new Error(
       'useNacelle requires a query object containing your GraphQL query string.'
     );
@@ -58,21 +58,17 @@ export function useNacelle({ credentials = null, query = null } = {}) {
   return data;
 }
 
-export function useCheckout({
-  credentials = null,
-  lineItems = null,
-  checkoutId = null
-} = {}) {
+export function useCheckout({ credentials, lineItems, checkoutId } = {}) {
   //
   // Fetch checkout data (url, id, etc.) from the Hail Frequency API
   //
-  if (credentials === null || credentials === undefined) {
+  if (!credentials) {
     throw new Error(
       `useCheckout requires a credentials object containing 
       your nacelle_space_id and nacelle_graphql_token.`
     );
   }
-  if (lineItems === null || lineItems === undefined) {
+  if (!lineItems) {
     throw new Error(
       `useCheckout requires a "lineItems" object containing 
       the "variantId" and "qty" of each item in the cart.`
@@ -98,38 +94,42 @@ export function useCheckout({
   const getDataCallback = useCallback(async () => {
     if (isSending) return;
     setIsSending(true);
-    const result = await axios({
-      url: 'https://hailfrequency.com/v2/graphql',
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Nacelle-Space-ID': nacelleSpaceId,
-        'X-Nacelle-Space-Token': nacelleGraphQLtoken
-      },
-      data: {
-        query: `
-        mutation sendCheckout($input: CheckoutInput) {
-          processCheckout(input: $input) {
-            id
-            completed
-            url
-            source
+    try {
+      const result = await axios({
+        url: 'https://hailfrequency.com/v2/graphql',
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Nacelle-Space-ID': nacelleSpaceId,
+          'X-Nacelle-Space-Token': nacelleGraphQLtoken
+        },
+        data: {
+          query: `
+          mutation sendCheckout($input: CheckoutInput) {
+            processCheckout(input: $input) {
+              id
+              completed
+              url
+              source
+            }
+          }
+          `,
+          variables: {
+            input: {
+              cartItems,
+              checkoutId
+            }
           }
         }
-        `,
-        variables: {
-          input: {
-            cartItems,
-            checkoutId
-          }
-        }
+      });
+      setCheckoutData(result);
+      if (isMounted.current) {
+        setIsSending(false);
       }
-    });
-    setCheckoutData(result);
-    if (isMounted.current) {
-      setIsSending(false);
+      return result;
+    } catch (error) {
+      throw new Error(error);
     }
-    return result;
   }, [cartItems, checkoutId, isSending, nacelleGraphQLtoken, nacelleSpaceId]);
   return [checkoutData, getDataCallback];
 }
