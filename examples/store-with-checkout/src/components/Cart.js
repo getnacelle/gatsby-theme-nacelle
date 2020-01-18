@@ -18,13 +18,13 @@ const Cart = () => {
     nacelle_space_id: process.env.GATSBY_NACELLE_SPACE_ID,
     nacelle_graphql_token: process.env.GATSBY_NACELLE_GRAPHQL_TOKEN
   };
-  const [checkoutData, getCheckoutData] = useCheckout({
+  const [checkoutData, getCheckoutData, isLoading] = useCheckout({
     credentials,
     lineItems,
     checkoutId
   });
   useEffect(() => {
-    if (checkoutData !== null) {
+    if (checkoutData !== null && checkoutData !== undefined) {
       const payload = checkoutData.data.data.processCheckout;
       dispatch(storeCheckout(payload));
       window.location = payload.url;
@@ -51,8 +51,12 @@ const Cart = () => {
       </div>
       <h2 style={{ textAlign: 'center' }}>Cart</h2>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button type="button" onClick={() => getCheckoutData()}>
-          Checkout
+        <button
+          type="button"
+          onClick={() => getCheckoutData()}
+          disabled={isLoading}
+        >
+          {isLoading ? <>Loading...</> : <>Checkout</>}
         </button>
       </div>
       {isCartEmpty ? (
