@@ -6,6 +6,9 @@
 </p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eea79857-e8bd-4832-87a4-ca398782251f/deploy-status)](https://app.netlify.com/sites/affectionate-sinoussi-2c533e/deploys)
+[![npm version](https://img.shields.io/npm/v/@nacelle/gatsby-theme-nacelle.svg)](https://www.npmjs.com/package/@nacelle/gatsby-theme-nacelle)
+[![GitHub issues](https://img.shields.io/github/issues/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/issues)
+[![GitHub license](https://img.shields.io/github/license/getnacelle/gatsby-theme-nacelle)](https://github.com/getnacelle/gatsby-theme-nacelle/blob/master/LICENSE)
 
 # Demo Site for Gatsby-Theme-Nacelle
 
@@ -18,3 +21,28 @@ A very basic, totally unstyled Gatsby site running `gatsby-theme-nacelle`. This 
 Nacelle is a headless eCommerce platform made for developers who want to create superior customer buying experiences. When you connect your Shopify, Magento, or custom eCommerce store to Nacelle, our proprietary indexing system supplies a high-performance connection to your back end.
 
 To learn more, check out our [docs](https://docs.getnacelle.com/intro.html#what-is-nacelle).
+
+## Quick Start
+
+To run this locally, you'll need to first [create a Nacelle account](https://dashboard.getnacelle.com/) and follow the [directions](https://docs.getnacelle.com/getting-started.html#configure-your-shopify-account) for connecting a Shopify store. Once your store is connected, copy the `Space ID` and `Token` values from your Space Settings in the [Nacelle Dashboard]((https://dashboard.getnacelle.com/).
+
+Next, we'll use these as environment variables. Create a `.env` file in the root of the `store-with-checkout` project with the following values:
+
+```dotenv
+NACELLE_GRAPHQL_TOKEN="your-token-goes-here"
+NACELLE_SPACE_ID="your-space-id-goes-here"
+```
+
+You're ready to go! Get started with Yarn or NPM:
+
+#### With Yarn
+
+```shell
+yarn develop
+```
+
+#### With NPM
+
+```shell
+npm run develop
+```
