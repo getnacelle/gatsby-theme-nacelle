@@ -129,10 +129,9 @@ export function useCheckout({ credentials, lineItems, checkoutId = null } = {}) 
       if (isMounted.current) {
         setIsSending(false); // only update if still mounted
       }
-      return checkoutResult;
     } catch (error) {
       throw new Error(error);
     }
   }, [cartItems, checkoutId, credentials, isSending]);
-  return [checkoutData, checkoutCallback];
+  return [checkoutData, checkoutCallback, isSending];
 }
