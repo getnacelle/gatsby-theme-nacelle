@@ -1127,6 +1127,11 @@
   resolved "https://registry.yarnpkg.com/@mikaelkristiansson/domready/-/domready-1.0.9.tgz#b2b85d8ac7bb2797e577050b61aeaf1b26fbd906"
   integrity sha512-FOAjeRHULSWXd6JMuCDwf3zPbe11kP971+Bufrj9M8rQ33ZMtThgKd6IJgzj6tr/+1Rq3czzLI1LAa9x0IC92w==
 
+"@nacelle/nacelle-react-hooks@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nacelle/nacelle-react-hooks/-/nacelle-react-hooks-1.0.2.tgz#9697be97b05c1d389b6231fbbd8ced9869dad430"
+  integrity sha512-HQorbBGEBNpMflPq1M4QKft9o2Ikp2eYWCD28iXVQQ5Q5D9fOTPExfr8pFumwiT0i3ZmndwMeYvlQLM/so/KHg==
+
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.3.tgz#3a582bdb53804c6ba6d146579c46e52130cf4a3b"
