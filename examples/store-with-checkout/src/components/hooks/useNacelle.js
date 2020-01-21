@@ -59,24 +59,21 @@ export function useNacelle({ credentials, query, variables } = {}) {
   // Fetch data from the Hail Frequency API with any valid query
   //
   const [data, setData] = useState(null);
-  useEffect(
-    (() => {
-      async function fetchData() {
-        try {
-          const result = await getHailFrequencyData({
-            credentials,
-            query,
-            variables
-          });
-          setData(result.data);
-        } catch (error) {
-          throw new Error(error);
-        }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await getHailFrequencyData({
+          credentials,
+          query,
+          variables
+        });
+        setData(result.data);
+      } catch (error) {
+        throw new Error(error);
       }
-      fetchData();
-    },
-    [])
-  );
+    }
+    fetchData();
+  }, [credentials, query, variables]);
   return data;
 }
 
