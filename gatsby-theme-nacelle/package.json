@@ -1,6 +1,6 @@
 {
   "name": "@nacelle/gatsby-theme-nacelle",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Gatsby theme for loading data from the Nacelle Hail Frequency API",
   "keywords": [
     "gatsby",
