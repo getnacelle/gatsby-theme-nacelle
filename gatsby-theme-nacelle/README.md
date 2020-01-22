@@ -85,4 +85,6 @@ module.exports = {
 
 ## Next Steps
 
-Once you've established a connection to Nacelle's Hail Frequency API, it's time to start building out your store. Check out the [example](https://github.com/getnacelle/gatsby-theme-nacelle/tree/master/example) to see how to programatically create pages using the data returned from Nacelle's Hail Frequency API.
+Once you've established a connection to Nacelle's Hail Frequency API, it's time to start building out your store. Check out the [examples](https://github.com/getnacelle/gatsby-theme-nacelle/tree/master/examples) to see how to:
+-  Programatically create pages using the data returned from Nacelle's Hail Frequency API
+-  Use Redux to create a persistent cart which uses Nacelle's Hail Frequency API for checkout processing

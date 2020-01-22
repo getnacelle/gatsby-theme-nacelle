@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'gatsby';
-import { useCheckout } from './hooks/useNacelle';
+import { useCheckout } from '@nacelle/nacelle-react-hooks';
 import {
   increment,
   decrement,
@@ -18,13 +18,13 @@ const Cart = () => {
     nacelle_space_id: process.env.GATSBY_NACELLE_SPACE_ID,
     nacelle_graphql_token: process.env.GATSBY_NACELLE_GRAPHQL_TOKEN
   };
-  const [checkoutData, getCheckoutData, isLoading] = useCheckout({
+  const [checkoutData, getCheckoutData, isLoading] = useCheckout(
     credentials,
     lineItems,
     checkoutId
-  });
+  );
   useEffect(() => {
-    if (checkoutData !== null && checkoutData !== undefined) {
+    if (checkoutData) {
       const payload = checkoutData.data.data.processCheckout;
       dispatch(storeCheckout(payload));
       window.location = payload.url;
