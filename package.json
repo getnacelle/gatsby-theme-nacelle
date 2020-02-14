@@ -5,10 +5,10 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
-    "develop": "yarn workspace store-with-checkout develop",
-    "build": "yarn workspace store-with-checkout build",
-    "serve": "yarn workspace store-with-checkout serve",
-    "test": "yarn workspace store-with-checkout jest"
+    "develop": "yarn workspace store-with-checkout-and-styling develop",
+    "build": "yarn workspace store-with-checkout-and-styling build",
+    "serve": "yarn workspace store-with-checkout-and-styling serve",
+    "test": "yarn workspace store-with-checkout-and-styling jest"
   },
   "workspaces": [
     "gatsby-theme-nacelle",
