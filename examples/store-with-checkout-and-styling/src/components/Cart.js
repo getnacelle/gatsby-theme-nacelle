@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'gatsby';
 import { useCheckout } from '@nacelle/nacelle-react-hooks';
@@ -53,6 +53,7 @@ const Cart = () => {
   const lineItems = useSelector(state => state.cart.lineItems);
   const checkoutId = useSelector(state => state.cart.checkoutId);
   const dispatch = useDispatch();
+  const [isNavigating, setIsNavigating] = useState(false);
   const credentials = {
     nacelle_space_id: process.env.GATSBY_NACELLE_SPACE_ID,
     nacelle_graphql_token: process.env.GATSBY_NACELLE_GRAPHQL_TOKEN
@@ -67,6 +68,7 @@ const Cart = () => {
       const payload = checkoutData.data.data.processCheckout;
       dispatch(storeCheckout(payload));
       window.location = payload.url;
+      setIsNavigating(true);
     }
   }, [checkoutData, dispatch]);
   const isCartEmpty = lineItems.length === 0;
@@ -78,9 +80,9 @@ const Cart = () => {
             <button
               type="button"
               onClick={() => getCheckoutData()}
-              disabled={isLoading}
+              disabled={isLoading || isNavigating}
             >
-              {isLoading ? <>Loading...</> : <>Checkout</>}
+              {isLoading || isNavigating ? <>Loading...</> : <>Checkout</>}
             </button>
           )}
         </ButtonContainer>
