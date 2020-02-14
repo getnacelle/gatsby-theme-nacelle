@@ -1,7 +1,8 @@
-import { SET_USER_DEVICE } from './user-actions';
+import { SET_USER_DEVICE, SET_CUSTOMER_ACCESS_TOKEN } from './user-actions';
 
 const initialState = {
-  isMobile: true
+  isMobile: true,
+  customerAccessToken: ''
 };
 
 export default function(state = initialState, action) {
@@ -12,6 +13,13 @@ export default function(state = initialState, action) {
         ...state,
         isMobile
       };
+    },
+    case SET_CUSTOMER_ACCESS_TOKEN: {
+      const { customerAccessToken } = action.payload;
+      return {
+        ...state,
+        customerAccessToken
+      }
     }
     default: {
       return state;
