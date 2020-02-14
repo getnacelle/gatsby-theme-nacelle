@@ -19,7 +19,7 @@
     "axios": "^0.19.1",
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.19.5",
+    "gatsby": "^2.19.17",
     "gatsby-alias-imports": "^1.0.4",
     "gatsby-plugin-manifest": "^2.2.37",
     "gatsby-plugin-offline": "^3.0.32",
