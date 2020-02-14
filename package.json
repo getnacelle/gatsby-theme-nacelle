@@ -13,5 +13,8 @@
   "workspaces": [
     "gatsby-theme-nacelle",
     "examples/*"
-  ]
+  ],
+  "dependencies": {
+    "@nacelle/nacelle-react-hooks": "^1.0.6"
+  }
 }
