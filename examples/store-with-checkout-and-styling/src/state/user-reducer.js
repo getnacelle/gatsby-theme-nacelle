@@ -13,7 +13,7 @@ export default function(state = initialState, action) {
         ...state,
         isMobile
       };
-    },
+    }
     case SET_CUSTOMER_ACCESS_TOKEN: {
       const { customerAccessToken } = action.payload;
       return {
