@@ -7,6 +7,7 @@
   "scripts": {
     "develop": "yarn workspace store-with-checkout-and-styling develop",
     "build": "yarn workspace store-with-checkout-and-styling build",
+    "clean": "yarn workspace store-with-checkout-and-styling clean",
     "serve": "yarn workspace store-with-checkout-and-styling serve",
     "test": "yarn workspace store-with-checkout-and-styling jest"
   },
