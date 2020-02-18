@@ -1,8 +1,13 @@
-import { SET_USER_DEVICE, SET_CUSTOMER_ACCESS_TOKEN } from './user-actions';
+import {
+  SET_USER_DEVICE,
+  SET_CUSTOMER,
+  SET_CUSTOMER_ACCESS_TOKEN,
+  SET_USER_ERRORS
+} from './user-actions';
 
 const initialState = {
-  isMobile: true,
-  customerAccessToken: ''
+  customerAccessToken: '',
+  userErrors: [null]
 };
 
 export default function(state = initialState, action) {
@@ -14,12 +19,29 @@ export default function(state = initialState, action) {
         isMobile
       };
     }
-    case SET_CUSTOMER_ACCESS_TOKEN: {
-      const { customerAccessToken } = action.payload;
+    case SET_CUSTOMER: {
+      const customer = action.payload;
       return {
         ...state,
-        customerAccessToken
-      }
+        customer
+      };
+    }
+    case SET_CUSTOMER_ACCESS_TOKEN: {
+      const { accessToken, expiresAt } = action.payload;
+      return {
+        ...state,
+        customerAccessToken: {
+          value: accessToken,
+          expiresAt
+        }
+      };
+    }
+    case SET_USER_ERRORS: {
+      const { userErrors } = action.payload;
+      return {
+        ...state,
+        userErrors: state.userErrors.concat(userErrors)
+      };
     }
     default: {
       return state;
