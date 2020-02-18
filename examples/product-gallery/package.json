@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "gatsby": "^2.18.21",
+    "gatsby": "^2.19.18",
     "gatsby-plugin-manifest": "^2.2.37",
     "@nacelle/gatsby-theme-nacelle": "^1.0.0",
     "react": "^16.12.0",

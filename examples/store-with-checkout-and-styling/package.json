@@ -20,7 +20,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "countrycitystatejson": "^0.2.15",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.19.17",
+    "gatsby": "^2.19.18",
     "gatsby-alias-imports": "^1.0.4",
     "gatsby-plugin-manifest": "^2.2.37",
     "gatsby-plugin-offline": "^3.0.32",
