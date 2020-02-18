@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { navigate } from 'gatsby';
 import styled from 'styled-components';
-import { Layout } from 'src/components';
 import axios from 'axios';
 import Multipassify from 'multipassify';
+import { useSelector, useDispatch } from 'react-redux';
+import { Layout } from 'src/components';
 import {
   CUSTOMER_ACCESS_TOKEN_CREATE,
   GET_CUSTOMER
@@ -51,7 +50,6 @@ const Login = () => {
         customerAccessToken: customerAccessToken.accessToken
       };
       const response = await accountClient.post(null, { query, variables });
-      console.log(JSON.stringify(response));
       const { data } = response.data;
       if (data.customer) {
         dispatch(setCustomer(data.customer));
@@ -80,13 +78,22 @@ const Login = () => {
       if (userErrors.length > 0) {
         dispatch(setUserErrors(userErrors));
       }
+      const inBrowser = window !== 'undefined';
+      const { protocol, host } = inBrowser
+        ? window.location
+        : { protocol: null, host: null };
+      const multipassifyArgs = inBrowser
+        ? {
+            ...customer,
+            return_to: `${protocol}//${host}/account`
+          }
+        : customer;
       const multipassUrl = multipassify.generateUrl(
-        { ...customer, return_to: '/account' },
+        multipassifyArgs,
         process.env.GATSBY_MYSHOPIFY_DOMAIN
       );
-      console.log(multipassUrl);
-      if (multipassUrl) {
-        navigate(response.multipassUrl);
+      if (multipassUrl && inBrowser) {
+        window.location = multipassUrl;
       }
     } catch (error) {
       throw new Error(error);
