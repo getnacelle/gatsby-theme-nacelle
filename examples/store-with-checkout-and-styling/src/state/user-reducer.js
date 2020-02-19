@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   customerAccessToken: '',
-  userErrors: [null]
+  userErrors: []
 };
 
 export default function(state = initialState, action) {
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
       const { userErrors } = action.payload;
       return {
         ...state,
-        userErrors: state.userErrors.concat(userErrors)
+        userErrors: [...state.userErrors, userErrors]
       };
     }
     case SET_LOGIN_STATUS: {
