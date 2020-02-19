@@ -4,7 +4,8 @@ import {
   SET_CUSTOMER_ACCESS_TOKEN,
   REMOVE_CUSTOMER_ACCESS_TOKEN,
   SET_USER_ERRORS,
-  SET_LOGIN_STATUS
+  SET_LOGIN_STATUS,
+  SET_LOGIN_METHOD
 } from './user-actions';
 
 const initialState = {
@@ -57,6 +58,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoggedIn
+      };
+    }
+    case SET_LOGIN_METHOD: {
+      const { loginMethod } = action.payload;
+      return {
+        ...state,
+        loginMethod
       };
     }
     default: {

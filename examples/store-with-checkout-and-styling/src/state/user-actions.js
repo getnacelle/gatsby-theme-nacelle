@@ -4,6 +4,7 @@ export const SET_CUSTOMER_ACCESS_TOKEN = 'SET_CUSTOMER_ACCESS_TOKEN';
 export const REMOVE_CUSTOMER_ACCESS_TOKEN = 'REMOVE_CUSTOMER_ACCESS_TOKEN';
 export const SET_USER_ERRORS = 'SET_USER_ERRORS';
 export const SET_LOGIN_STATUS = 'SET_LOGIN_STATUS';
+export const SET_LOGIN_METHOD = 'SET_LOGIN_METHOD';
 
 export function setUserDevice(payload) {
   return {
@@ -42,6 +43,13 @@ export function setUserErrors(payload) {
 export function setLoginStatus(payload) {
   return {
     type: SET_LOGIN_STATUS,
+    payload
+  };
+}
+
+export function setLoginMethod(payload) {
+  return {
+    type: SET_LOGIN_METHOD,
     payload
   };
 }
