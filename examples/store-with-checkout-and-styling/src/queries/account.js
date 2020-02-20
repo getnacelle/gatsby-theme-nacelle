@@ -40,6 +40,22 @@ export const CUSTOMER_ACCESS_TOKEN_CREATE = `
   }
 `;
 
+export const CUSTOMER_ACCESS_TOKEN_CREATE_WITH_MULTIPASS = `
+  mutation customerAccessTokenCreateWithMultipass($multipassToken: String!) {
+    customerAccessTokenCreateWithMultipass(multipassToken: $multipassToken) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`;
+
 export const CUSTOMER_ACCESS_TOKEN_RENEW = `
   mutation customerAccessTokenRenew($customerAccessToken: String!) {
     customerAccessTokenRenew(customerAccessToken: $customerAccessToken) {
