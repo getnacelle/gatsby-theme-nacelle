@@ -7,6 +7,7 @@ import {
   CUSTOMER_ACCESS_TOKEN_CREATE,
   CUSTOMER_ACCESS_TOKEN_CREATE_WITH_MULTIPASS,
   CUSTOMER_CREATE,
+  CUSTOMER_UPDATE,
   GET_CUSTOMER,
   GET_CUSTOMER_ADDRESSES
 } from 'src/queries/account';
@@ -187,6 +188,7 @@ const Login = () => {
         dispatch(setCustomerAccessToken(customerAccessToken));
         await fetchCustomer(customerAccessToken);
         await fetchAdresses(customerAccessToken);
+        setIsLoading(false);
       } else {
         throw new Error(`Multipass token could not be exchanged for customer
         access token`);
@@ -256,6 +258,7 @@ const Login = () => {
           setCustomerCreateCount(count => count + 1);
           setNeedsToRegister(false);
           setNeedsToLogin(true);
+          console.log(`Registered as: ${firstName} ${lastName}`);
         }
       } catch (error) {
         if (error.message.includes('Creating Customer Limit exceeded')) {
