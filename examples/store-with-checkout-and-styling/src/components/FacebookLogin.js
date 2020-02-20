@@ -1,5 +1,6 @@
 /* global FB */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FacebookClient from 'src/components/FacebookClient';
 
@@ -27,6 +28,7 @@ const FacebookLogin = ({
 }) => {
   const [isLoggedInWithFacebook, setIsLoggedInWithFacebook] = useState(false);
   const [facebookAvailable, setFacebookAvailable] = useState(false);
+  const customer = useSelector(state => state.user.customer);
   const buttonText = isLoggedInWithFacebook
     ? 'Logout'
     : 'Continue with Facebook';
@@ -48,13 +50,6 @@ const FacebookLogin = ({
       setIsLoggedInWithFacebook(isLoggedIn);
     });
   }
-
-  useEffect(() => {
-    if (facebookAvailable) {
-      console.log('Facebook is available');
-      updateLoginStatus();
-    }
-  }, [facebookAvailable]);
 
   function getUser() {
     return new Promise(function(resolve, reject) {
@@ -104,6 +99,16 @@ const FacebookLogin = ({
       logout();
     }
   }
+
+  useEffect(() => {
+    if (facebookAvailable) {
+      console.log('Facebook is available');
+      updateLoginStatus();
+      if (!customer && isLoggedInWithFacebook) {
+        logout();
+      }
+    }
+  }, [customer, facebookAvailable, isLoggedInWithFacebook, logout]);
 
   return (
     <>
