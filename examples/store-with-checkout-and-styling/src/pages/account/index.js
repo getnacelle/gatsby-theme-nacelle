@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from 'src/components';
 import { accountClient } from 'src/util';
@@ -9,6 +10,10 @@ import {
   setUserErrors
 } from 'src/state/user-actions';
 import { CUSTOMER_ACCESS_TOKEN_DELETE } from 'src/queries/account';
+
+const PageLayout = styled.div`
+  padding: 0 1em;
+`;
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -64,10 +69,12 @@ const AccountPage = () => {
   const customer = useSelector(state => state.user.customer);
   return (
     <Layout>
-      <FacebookClient />
-      <h1>Account</h1>
-      {customer && <Dashboard customer={customer} />}
-      {!customer && <ToLogin />}
+      <PageLayout>
+        <FacebookClient />
+        <h1>Account</h1>
+        {customer && <Dashboard customer={customer} />}
+        {!customer && <ToLogin />}
+      </PageLayout>
     </Layout>
   );
 };
