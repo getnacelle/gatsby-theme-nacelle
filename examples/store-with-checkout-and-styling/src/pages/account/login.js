@@ -178,7 +178,7 @@ const Login = () => {
             return;
           }
         }
-      } else if (userLoginMethod === 'social') {
+      } else if (['social', 'facebook', 'google'].indexOf(userLoginMethod)) {
         customerAccessToken = await exchangeMultipassForAccessToken();
       } else {
         throw new Error('User login method not set.');
