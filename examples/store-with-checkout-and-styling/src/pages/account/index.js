@@ -44,15 +44,12 @@ const Logout = () => {
       const query = CUSTOMER_ACCESS_TOKEN_DELETE;
       const variables = { customerAccessToken: accessToken };
       const response = await accountClient.post(null, { query, variables });
-      console.log(JSON.stringify(response));
-      const { data } = response.data;
-      if (data.errors) {
-        throw new Error(data.errors.message);
+      dispatch(removeCustomerAccessToken());
+      const { data, errors } = response.data;
+      if (errors) {
+        throw new Error(errors[0].message);
       }
-      const { deletedAccessToken, userErrors } = data.customerAccessTokenDelete;
-      if (deletedAccessToken) {
-        dispatch(removeCustomerAccessToken());
-      }
+      const { userErrors } = data.customerAccessTokenDelete;
       if (userErrors && userErrors.length > 0) {
         dispatch(setUserErrors(userErrors));
       }
