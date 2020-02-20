@@ -1,6 +1,7 @@
 import {
   SET_USER_DEVICE,
   SET_CUSTOMER,
+  SET_CUSTOMER_ADDRESSES,
   SET_CUSTOMER_ACCESS_TOKEN,
   REMOVE_CUSTOMER_ACCESS_TOKEN,
   SET_USER_ERRORS,
@@ -29,6 +30,13 @@ export default function(state = initialState, action) {
         customer
       };
     }
+    case SET_CUSTOMER_ADDRESSES: {
+      const { customerAddresses } = action.payload;
+      return {
+        ...state,
+        customer: { ...state.customer, addresses: customerAddresses }
+      };
+    }
     case SET_CUSTOMER_ACCESS_TOKEN: {
       const { accessToken, expiresAt } = action.payload;
       return {
@@ -47,10 +55,9 @@ export default function(state = initialState, action) {
       };
     }
     case SET_USER_ERRORS: {
-      const { userErrors } = action.payload;
       return {
         ...state,
-        userErrors: [...state.userErrors, userErrors]
+        userErrors: [...state.userErrors, action.payload.userErrors]
       };
     }
     case SET_LOGIN_STATUS: {
