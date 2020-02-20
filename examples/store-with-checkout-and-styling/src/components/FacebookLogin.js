@@ -24,7 +24,7 @@ const FacebookLogin = ({
   setUserLoginMethod,
   setFirstName,
   setLastName,
-  handleRegister
+  isLoading
 }) => {
   const [isLoggedInWithFacebook, setIsLoggedInWithFacebook] = useState(false);
   const [facebookAvailable, setFacebookAvailable] = useState(false);
@@ -45,8 +45,7 @@ const FacebookLogin = ({
     FB.getLoginStatus(function(response) {
       const { status } = response;
       const isLoggedIn = status === 'connected';
-      console.log('Login status:');
-      console.log(JSON.stringify(status));
+      console.log(`Facebook Login status:\n${JSON.stringify(status)}`);
       setIsLoggedInWithFacebook(isLoggedIn);
     });
   }
@@ -116,7 +115,7 @@ const FacebookLogin = ({
         onClick={handlePress}
         onKeyDown={handlePress}
         tabIndex={0}
-        disabled={!facebookAvailable}
+        disabled={!facebookAvailable || isLoading}
       >
         {buttonText}
       </FacebookButton>
