@@ -147,7 +147,7 @@ const Header = () => {
               </LinkBar>
             </>
           )}
-          <Cart />
+          {typeof isMobile !== 'undefined' && <Cart />}
         </NavBar>
       </Inner>
     </HeaderStyle>
