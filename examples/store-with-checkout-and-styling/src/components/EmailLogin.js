@@ -1,11 +1,21 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  padding: 2em 0;
   input {
     margin-bottom: 1em;
     width: 15em;
+  }
+  button {
+    cursor: pointer;
+  }
+  span {
+    margin-left: 1em;
+  }
+  a {
+    text-decoration: none;
+    color: blue;
   }
 `;
 
@@ -40,7 +50,7 @@ const EmailLogin = ({
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="password"
             minLength="5"
             autoComplete="current-password"
             onChange={e => setPassword(e.target.value)}
@@ -57,16 +67,9 @@ const EmailLogin = ({
         >
           Log In
         </button>
-      </div>
-      <div>
-        <button
-          type="button"
-          onClick={registerUser}
-          onKeyDown={registerUser}
-          disabled={isLoading}
-        >
-          Register
-        </button>
+        <span>
+          or <Link to="/account/register">Register</Link>
+        </span>
       </div>
     </Form>
   );
