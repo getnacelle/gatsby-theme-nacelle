@@ -68,10 +68,10 @@ export default function(state = initialState, action) {
       };
     }
     case SET_LOGIN_METHOD: {
-      const { loginMethod } = action.payload;
+      const { userLoginMethod } = action.payload;
       return {
         ...state,
-        loginMethod
+        loginMethod: userLoginMethod
       };
     }
     default: {
