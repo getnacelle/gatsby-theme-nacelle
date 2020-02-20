@@ -20,7 +20,6 @@ const FacebookButton = styled.button`
 const FacebookLogin = ({
   handleSubmit,
   setEmail,
-  setPassword,
   setUserLoginMethod,
   setFirstName,
   setLastName,
@@ -69,7 +68,6 @@ const FacebookLogin = ({
           if (email) {
             console.log(`Setting email to: ${email}`);
             setEmail(email);
-            setPassword(id);
             setFirstName(first_name);
             setLastName(last_name);
             resolve({ email, id, first_name, last_name });

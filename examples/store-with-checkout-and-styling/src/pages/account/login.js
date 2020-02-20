@@ -20,6 +20,18 @@ import {
 
 const PageLayout = styled.div`
   padding: 0 1em;
+  h3 {
+    margin-top: 1em;
+  }
+`;
+
+const LoginOptions = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+  div {
+    padding-right: 4em;
+  }
 `;
 
 const Login = () => {
@@ -36,7 +48,6 @@ const Login = () => {
   const [customerCreateCount, setCustomerCreateCount] = useState(0);
   const dispatch = useDispatch();
   const customer = useSelector(state => state.user.customer);
-  const multipassToken = useSelector(state => state.user.multipassToken);
 
   const fetchCustomer = useCallback(
     async customerAccessToken => {
@@ -71,7 +82,6 @@ const Login = () => {
         console.log(`Variables: ${JSON.stringify(variables)}`);
         const query = GET_CUSTOMER_ADDRESSES;
         const response = await accountClient.post(null, { query, variables });
-        console.log(`Response: ${JSON.stringify(response)}`);
         const { data } = response.data;
         if (data.customer) {
           dispatch(
@@ -93,6 +103,16 @@ const Login = () => {
 
   const exchangeMultipassForAccessToken = useCallback(async () => {
     try {
+      const inBrowser = window !== 'undefined';
+      const { protocol, host } = inBrowser
+        ? window.location
+        : { protocol: null, host: null };
+      const customerData = {
+        ...customer,
+        email,
+        return_to: `${protocol}//${host}/account`
+      };
+      const multipassToken = multipassify.encode(customerData);
       const variables = { multipassToken };
       const query = CUSTOMER_ACCESS_TOKEN_CREATE_WITH_MULTIPASS;
       const response = await accountClient.post(null, { query, variables });
@@ -115,117 +135,62 @@ const Login = () => {
     } catch (error) {
       throw new Error(error);
     }
-  }, [dispatch, multipassToken]);
-
-  // const multipassLogin = useCallback(async () => {
-  //   try {
-  //     if (!email) {
-  //       throw new Error('Email is empty');
-  //     }
-  //     // const query = CUSTOMER_ACCESS_TOKEN_CREATE;
-  //     // const variables = {
-  //     //   input: { email, password }
-  //     // };
-  //     // console.log(`Submitted Varibles:\n ${JSON.stringify(variables)}`);
-  //     // const response = await accountClient.post(null, { query, variables });
-  //     // const {
-  //     //   customerAccessToken,
-  //     //   userErrors
-  //     // } = response.data.data.customerAccessTokenCreate;
-  //     const customerAccessToken = await exchangeMultipassForAccessToken();
-  //     if (customerAccessToken) {
-  //       dispatch(setCustomerAccessToken(customerAccessToken));
-  //       await fetchCustomer(customerAccessToken);
-  //     }
-  //     // if (userErrors && userErrors.length > 0) {
-  //     //   console.log('User Errors:');
-  //     //   console.log(JSON.stringify(userErrors));
-  //     //   dispatch(setUserErrors({ userErrors: userErrors[0] }));
-  //     //   if (userErrors[0].message === 'Unidentified customer') {
-  //     //     if (customerCreateCount <= 1 && userLoginMethod === 'social') {
-  //     //       setNeedsToRegister(true);
-  //     //       return;
-  //     //     }
-  //     //     return new Error('too many attempts to create a new customer.');
-  //     //   }
-  //     // }
-  //     const inBrowser = window !== 'undefined';
-  //     const { protocol, host } = inBrowser
-  //       ? window.location
-  //       : { protocol: null, host: null };
-  //     const multipassifyArgs = inBrowser
-  //       ? {
-  //           ...customer,
-  //           email,
-  //           return_to: `${protocol}//${host}/account`
-  //         }
-  //       : { ...customer, email };
-  //     const multipassUrl = multipassify.generateUrl(
-  //       multipassifyArgs,
-  //       process.env.GATSBY_MYSHOPIFY_DOMAIN
-  //     );
-  //     if (multipassUrl && inBrowser) {
-  //       window.location = multipassUrl;
-  //     }
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // }, [
-  //   customer,
-  //   dispatch,
-  //   email,
-  //   exchangeMultipassForAccessToken,
-  //   fetchCustomer
-  // ]);
+  }, [customer, dispatch, email]);
 
   const multipassLogin = useCallback(async () => {
     try {
       if (!email) {
         throw new Error('Email is empty');
       }
-      const query = CUSTOMER_ACCESS_TOKEN_CREATE;
-      const variables = {
-        input: { email, password }
-      };
-      console.log(`Submitted Varibles:\n ${JSON.stringify(variables)}`);
-      const response = await accountClient.post(null, { query, variables });
-      setIsLoading(false);
-      const {
-        customerAccessToken,
-        userErrors
-      } = response.data.data.customerAccessTokenCreate;
-      if (customerAccessToken) {
-        dispatch(setCustomerAccessToken(customerAccessToken));
-        await fetchCustomer(customerAccessToken);
-        await fetchAdresses(customerAccessToken);
-      }
-      if (userErrors && userErrors.length > 0) {
-        console.log('User Errors:');
-        console.log(JSON.stringify(userErrors));
-        dispatch(setUserErrors({ userErrors: userErrors[0] }));
-        if (userErrors[0].message === 'Unidentified customer') {
-          if (customerCreateCount <= 1) {
-            if (userLoginMethod === 'social') {
-              setNeedsToRegister(true);
-              return;
-            }
-            setAlertMessage(`No account exists for this email address. 
-              To register, select Register.`);
-          }
-          return new Error('too many attempts to create a new customer.');
-        }
-      }
       const inBrowser = window !== 'undefined';
       const { protocol, host } = inBrowser
         ? window.location
         : { protocol: null, host: null };
+      const customerData = {
+        ...customer,
+        email,
+        return_to: `${protocol}//${host}/account`
+      };
       const multipassifyArgs = inBrowser
-        ? {
-            ...customer,
-            email,
-            return_to: `${protocol}//${host}/account`
-          }
+        ? customerData
         : { ...customer, email };
+      let customerAccessToken;
+      let userErrors;
+      if (userLoginMethod === 'email') {
+        const query = CUSTOMER_ACCESS_TOKEN_CREATE;
+        const variables = {
+          input: { email, password }
+        };
+        console.log(`Submitted Varibles:\n ${JSON.stringify(variables)}`);
+        const response = await accountClient.post(null, { query, variables });
+        setIsLoading(false);
+        customerAccessToken =
+          response.data.data.customerAccessTokenCreate.customerAccessToken;
+        userErrors = response.data.data.customerAccessTokenCreate.userErrors;
+        if (userErrors && userErrors.length > 0) {
+          console.log('User Errors:');
+          console.log(JSON.stringify(userErrors));
+          dispatch(setUserErrors({ userErrors: userErrors[0] }));
+          if (userErrors[0].message === 'Unidentified customer') {
+            setAlertMessage(
+              `No account exists for this email address. To register, select Register.`
+            );
+            return;
+          }
+        }
+      } else if (userLoginMethod === 'social') {
+        customerAccessToken = await exchangeMultipassForAccessToken();
+      } else {
+        throw new Error('User login method not set.');
+      }
+      if (customerAccessToken) {
+        dispatch(setCustomerAccessToken(customerAccessToken));
+        await fetchCustomer(customerAccessToken);
+        await fetchAdresses(customerAccessToken);
+      } else {
+        throw new Error(`Multipass token could not be exchanged for customer
+        access token`);
+      }
       const multipassUrl = multipassify.generateUrl(
         multipassifyArgs,
         process.env.GATSBY_MYSHOPIFY_DOMAIN
@@ -238,9 +203,9 @@ const Login = () => {
     }
   }, [
     customer,
-    customerCreateCount,
     dispatch,
     email,
+    exchangeMultipassForAccessToken,
     fetchAdresses,
     fetchCustomer,
     password,
@@ -252,9 +217,17 @@ const Login = () => {
       if (event) {
         event.preventDefault();
       }
+      if (customerCreateCount > 3) {
+        throw new Error(
+          'Maximum registration accounts exceeded. Please refresh.'
+        );
+      }
       try {
         setIsLoading(true);
-        const variables = { input: { firstName, lastName, email, password } };
+        const variables =
+          userLoginMethod === 'email'
+            ? { input: { firstName, lastName, email, password } }
+            : { input: { firstName, lastName, email } };
         const query = CUSTOMER_CREATE;
         console.log(`Registering new user:\n${JSON.stringify(variables)}`);
         if (!email) {
@@ -294,7 +267,15 @@ const Login = () => {
         }
       }
     },
-    [dispatch, email, firstName, lastName, password]
+    [
+      customerCreateCount,
+      dispatch,
+      email,
+      firstName,
+      lastName,
+      password,
+      userLoginMethod
+    ]
   );
 
   const handleSubmit = useCallback(
@@ -341,25 +322,33 @@ const Login = () => {
   return (
     <Layout>
       <PageLayout>
-        <h1>Login Page</h1>
+        <h1>Account Login</h1>
         {alertMessage && <p>{alertMessage}</p>}
-        <EmailLogin
-          handleSubmit={handleSubmit}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          setUserLoginMethod={setUserLoginMethod}
-          handleRegister={handleRegister}
-          isLoading={isLoading}
-        />
-        <FacebookLogin
-          handleSubmit={handleSubmit}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          setUserLoginMethod={setUserLoginMethod}
-          setFirstName={setFirstName}
-          setLastName={setLastName}
-          isLoading={isLoading}
-        />
+        <LoginOptions>
+          <div>
+            <h3>With Email</h3>
+            <EmailLogin
+              handleSubmit={handleSubmit}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              setUserLoginMethod={setUserLoginMethod}
+              handleRegister={handleRegister}
+              isLoading={isLoading}
+            />
+          </div>
+          <div>
+            <h3>With Social Media</h3>
+            <FacebookLogin
+              handleSubmit={handleSubmit}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              setUserLoginMethod={setUserLoginMethod}
+              setFirstName={setFirstName}
+              setLastName={setLastName}
+              isLoading={isLoading}
+            />
+          </div>
+        </LoginOptions>
       </PageLayout>
     </Layout>
   );
