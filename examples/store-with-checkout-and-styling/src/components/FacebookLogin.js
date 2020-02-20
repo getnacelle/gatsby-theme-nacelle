@@ -1,5 +1,5 @@
 /* global FB */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FacebookClient from 'src/components/FacebookClient';
@@ -7,8 +7,8 @@ import FacebookClient from 'src/components/FacebookClient';
 const FacebookButton = styled.button`
   font-family: Helvetica, Arial, sans-serif;
   cursor: pointer;
-  color: white;
-  background-color: #1878f3;
+  color: ${({ disabled }) => (disabled ? '#1878f3' : 'white')};
+  background-color: ${({ disabled }) => (disabled ? 'grey' : '#1878f3')};
   font-size: 13pt;
   font-weight: bold;
   width: 16em;
@@ -28,26 +28,20 @@ const FacebookLogin = ({
 }) => {
   const [isLoggedInWithFacebook, setIsLoggedInWithFacebook] = useState(false);
   const [facebookAvailable, setFacebookAvailable] = useState(false);
+  const [loadingCount, setLoadingCount] = useState(0);
   const customer = useSelector(state => state.user.customer);
   const buttonText = isLoggedInWithFacebook
     ? 'Logout'
     : 'Continue with Facebook';
 
-  const facebookLoaded = typeof FB !== 'undefined';
-  const pollSdk = setInterval(() => {
-    if (facebookLoaded) {
-      setFacebookAvailable(true);
-      // FB.XFBML.parse();
-      clearInterval(pollSdk);
-    }
-  }, 5);
-
   function updateLoginStatus() {
-    FB.getLoginStatus(function(response) {
-      const { status } = response;
-      const isLoggedIn = status === 'connected';
-      console.log(`Facebook Login status:\n${JSON.stringify(status)}`);
-      setIsLoggedInWithFacebook(isLoggedIn);
+    return new Promise(resolve => {
+      FB.getLoginStatus(function(response) {
+        const { status } = response;
+        const isLoggedIn = status === 'connected';
+        setIsLoggedInWithFacebook(isLoggedIn);
+        resolve();
+      });
     });
   }
 
@@ -61,7 +55,6 @@ const FacebookLogin = ({
           // eslint-disable-next-line camelcase
           const { email, id, first_name, last_name } = response;
           if (email) {
-            console.log(`Setting email to: ${email}`);
             setEmail(email);
             setFirstName(first_name);
             setLastName(last_name);
@@ -75,40 +68,71 @@ const FacebookLogin = ({
   }
 
   function login() {
-    FB.login(
-      function(_response) {
-        getUser().then(() => {
-          updateLoginStatus();
-          handleSubmit();
-        });
-      },
-      { scope: 'public_profile,email' }
-    );
+    return new Promise((resolve, reject) => {
+      FB.login(
+        async function(response) {
+          if (response.authResponse) {
+            try {
+              await getUser();
+              await updateLoginStatus();
+              handleSubmit();
+              resolve();
+            } catch (error) {
+              throw new Error(error);
+            }
+          } else {
+            reject(
+              new Error('User cancelled login or did not fully authorize.')
+            );
+          }
+        },
+        { scope: 'public_profile,email' }
+      );
+    });
   }
 
-  function logout() {
-    FB.logout();
-    updateLoginStatus();
-  }
+  const logout = useCallback(
+    () =>
+      new Promise(resolve => {
+        FB.logout();
+        updateLoginStatus().then(() => resolve());
+      }),
+    []
+  );
 
-  function handlePress() {
+  async function handlePress() {
     if (!isLoggedInWithFacebook) {
       setUserLoginMethod('facebook');
-      login();
+      await login();
     } else {
-      logout();
+      await logout();
     }
   }
 
   useEffect(() => {
-    if (facebookAvailable) {
-      console.log('Facebook is available');
-      updateLoginStatus();
-      if (!customer && isLoggedInWithFacebook) {
-        logout();
-      }
+    const facebookLoaded = typeof FB !== 'undefined';
+    if (!facebookLoaded) {
+      setFacebookAvailable(false);
+    } else {
+      setFacebookAvailable(true);
     }
-  }, [customer, facebookAvailable, isLoggedInWithFacebook, logout]);
+  }, []);
+
+  useEffect(() => {
+    if (facebookAvailable && !isLoading) {
+      updateLoginStatus().then(() => {
+        if (!customer && isLoggedInWithFacebook) {
+          logout();
+        }
+      });
+    }
+  }, [customer, facebookAvailable, isLoading, isLoggedInWithFacebook, logout]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setLoadingCount(x => x + 1);
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -118,9 +142,9 @@ const FacebookLogin = ({
         onClick={handlePress}
         onKeyDown={handlePress}
         tabIndex={0}
-        disabled={!facebookAvailable || isLoading}
+        disabled={loadingCount || !facebookAvailable}
       >
-        {buttonText}
+        {loadingCount ? 'Loading...' : buttonText}
       </FacebookButton>
       <div id="fb-root" />
     </>
