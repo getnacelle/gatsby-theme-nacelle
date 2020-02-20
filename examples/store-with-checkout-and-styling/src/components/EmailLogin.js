@@ -14,43 +14,62 @@ const EmailLogin = ({
   setEmail,
   setPassword,
   setUserLoginMethod,
-  setFirstName,
-  setLastName,
-  handleRegister
-}) => (
-  <Form onSubmit={handleSubmit}>
-    <div>
-      <label htmlFor="email">
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          onChange={e => setEmail(e.target.value)}
-          onBlur={e => setEmail(e.target.value)}
-        />
-      </label>
-    </div>
-    <div>
-      <label htmlFor="password">
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={e => setPassword(e.target.value)}
-          onBlur={e => setPassword(e.target.value)}
-        />
-      </label>
-    </div>
-    <div>
-      <button
-        type="submit"
-        onClick={setUserLoginMethod('email')}
-        onKeyDown={setUserLoginMethod('email')}
-      >
-        Log In
-      </button>
-    </div>
-  </Form>
-);
+  handleRegister,
+  isLoading
+}) => {
+  function registerUser() {
+    setUserLoginMethod('email');
+    handleRegister();
+  }
+  return (
+    <Form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email">
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            autoComplete="off"
+            onChange={e => setEmail(e.target.value)}
+            onBlur={e => setEmail(e.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="password">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            minLength="5"
+            autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
+            onBlur={e => setPassword(e.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <button
+          type="submit"
+          onClick={() => setUserLoginMethod('email')}
+          onKeyDown={() => setUserLoginMethod('email')}
+          disabled={isLoading}
+        >
+          Log In
+        </button>
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={registerUser}
+          onKeyDown={registerUser}
+          disabled={isLoading}
+        >
+          Register
+        </button>
+      </div>
+    </Form>
+  );
+};
 
 export default EmailLogin;
