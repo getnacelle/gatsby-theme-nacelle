@@ -1,6 +1,6 @@
 {
   "name": "@nacelle/gatsby-theme-nacelle",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Gatsby theme for loading data from the Nacelle Hail Frequency API",
   "keywords": [
     "gatsby",
@@ -28,6 +28,6 @@
     "gatsby": "^2.6.0"
   },
   "dependencies": {
-    "gatsby-source-graphql": "^2.1.31"
+    "gatsby-source-graphql": "^2.5.3"
   }
 }
