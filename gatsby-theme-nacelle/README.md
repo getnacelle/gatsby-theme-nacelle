@@ -1,9 +1,6 @@
-<p align="center">
-  <a href="https://www.getnacelle.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/examples/store-with-checkout/src/images/nacelle-rocket-icon-crop.png" width="60" />
-  </a>
-</p>
+# [DEPRECATED] Gatsby Theme Nacelle
+
+_This Gatsby theme has been deprecated. Please use [`gatsby-source-nacelle`](https://www.gatsbyjs.com/plugins/@nacelle/gatsby-source-nacelle) instead._
 
 <h1 align="center">
   Gatsby-Theme-Nacelle
@@ -49,10 +46,10 @@ module.exports = {
       resolve: "@nacelle/gatsby-theme-nacelle",
       options: {
         nacelle_space_id: YOUR_NACELLE_SPACE_ID,
-        nacelle_graphql_token: YOUR_NACELLE_GRAPHQL_TOKEN
-      }
-    }
-  ]
+        nacelle_graphql_token: YOUR_NACELLE_GRAPHQL_TOKEN,
+      },
+    },
+  ],
 };
 ```
 
@@ -76,15 +73,16 @@ module.exports = {
       resolve: "@nacelle/gatsby-theme-nacelle",
       options: {
         nacelle_space_id: process.env.NACELLE_SPACE_ID,
-        nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN
-      }
-    }
-  ]
+        nacelle_graphql_token: process.env.NACELLE_GRAPHQL_TOKEN,
+      },
+    },
+  ],
 };
 ```
 
 ## Next Steps
 
 Once you've established a connection to Nacelle's Hail Frequency API, it's time to start building out your store. Check out the [examples](https://github.com/getnacelle/gatsby-theme-nacelle/tree/master/examples) to see how to:
--  Programatically create pages using the data returned from Nacelle's Hail Frequency API
--  Use Redux to create a persistent cart which uses Nacelle's Hail Frequency API for checkout processing
+
+- Programatically create pages using the data returned from Nacelle's Hail Frequency API
+- Use Redux to create a persistent cart which uses Nacelle's Hail Frequency API for checkout processing

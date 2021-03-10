@@ -1,12 +1,8 @@
-<p align="center">
-  <a href="https://www.getnacelle.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-    <img alt="Nacelle" src="https://raw.githubusercontent.com/getnacelle/gatsby-theme-nacelle/master/examples/store-with-checkout/src/images/nacelle-rocket-icon-crop.png" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby-Theme-Nacelle Workspace
-</h1>
+# [DEPRECATED] Gatsby-Theme-Nacelle Workspace
+
+_`gatsby-theme-nacelle` has been deprecated - please use [`gatsby-source-nacelle`](https://www.gatsbyjs.com/plugins/@nacelle/gatsby-source-nacelle) instead._
+
+---
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eea79857-e8bd-4832-87a4-ca398782251f/deploy-status)](https://app.netlify.com/sites/affectionate-sinoussi-2c533e/deploys)
 [![npm version](https://img.shields.io/npm/v/@nacelle/gatsby-theme-nacelle.svg)](https://www.npmjs.com/package/@nacelle/gatsby-theme-nacelle)
